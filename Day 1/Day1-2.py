@@ -36,6 +36,15 @@ numbers_dictionary = {
     'nine': 9,
 }
 
+def find_match(word, dictionary):
+    matches= []
+    for i in range (len(word)):
+        for j in range (i+1, len(word) +1):
+            substring= word[i:j]
+            if substring in dictionary:
+                matches.append(substring)
+    return matches
+
 with open(file_path, 'r') as file:
     # Read the contents of the file
     file_contents = file.read()
@@ -45,17 +54,21 @@ with open(file_path, 'r') as file:
     new_digit=0
     first_digit= "0"
     second_digit= "0"
+    integer_total= 0
     
     for word in words:
-        integer_total= 0
         # print(word) # prints each word
-        for letter in word:
+        matching_words= find_match(word, numbers_dictionary)
+        
+        for letter in matching_words:
             if letter in numbers_dictionary:
                 first_digit= str(numbers_dictionary[letter])
+                print(first_digit)
                 break
-        for letter in word[::-1]:
+        for letter in matching_words[::-1]:
             if letter in numbers_dictionary:
                 second_digit= str(numbers_dictionary[letter])
+                print(second_digit)
                 break
         new_digit= first_digit+second_digit
         integer_total= int(new_digit)
