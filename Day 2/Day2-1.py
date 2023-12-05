@@ -23,7 +23,7 @@
 
 # Determine which games would have been possible if the bag had been loaded with only 12 red cubes, 13 green cubes, and 14 blue cubes. What is the sum of the IDs of those games?
 
-
+import re
 
 file_path = "Day 2/game_text.txt"
 
@@ -40,4 +40,57 @@ blue_counter= 0
 with open(file_path, 'r') as file:
     # Read the contents of the file
     file_contents = file.read()
-    words= file_contents.split()
+    words= file_contents.splitlines()
+    
+
+def game_possibility_check(lst, color):
+    for num in lst:
+        if color == 'red' and num > max_red:
+            return False
+        elif color == 'green' and num > max_green:
+            return False
+        elif color == 'blue' and num > max_blue:
+            return False
+    return True
+
+
+for word in words:
+    game_name_split, elf_pick_split=word.split(": ")            # Splits the Game # from the rest of the sentence
+    elf_pick_split=elf_pick_split.split(";")                    # Splits the rest of the sentence into each color and their amount
+    game_id_split= game_name_split.split(" ")                   # Splits word Game from the number
+    game_id= int(game_id_split[1])                              # Converts the game ID into an integer
+    
+    """Grabbing number of each color."""
+    red_color_amount= [int(x) for x in re.findall(r'(\d+(?:\.\d+)?) red', word)]
+    blue_color_amount= [int(x) for x in re.findall(r'(\d+(?:\.\d+)?) blue', word)]
+    green_color_amount= [int(x) for x in re.findall(r'(\d+(?:\.\d+)?) green', word)]
+    
+    """Converting list to integer."""
+    for num in range(0, len(red_color_amount)):
+        red_color_amount[num]= int(red_color_amount[num])
+        possibility_red= game_possibility_check(red_color_amount, 'red')
+    for num in range(0, len(blue_color_amount)):
+        blue_color_amount[num]= int(blue_color_amount[num])
+        possibility_blue= game_possibility_check(blue_color_amount, 'blue')
+    for num in range(0, len(green_color_amount)):
+        green_color_amount[num]= int(green_color_amount[num])
+        possibility_green= game_possibility_check(green_color_amount, 'green')
+        
+    if possibility_red == 'False':
+        print("Sorry. Can't do that.")
+    else:
+        print("Ok!")
+    
+    if possibility_green == 'False':
+        print("Sorry. Can't do that.")
+    else:
+        print("Ok!")
+        
+    if possibility_blue == 'False':
+        print("Sorry. Can't do that.")
+    else:
+        print("Ok!")
+            
+        
+    
+    
