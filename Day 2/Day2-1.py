@@ -24,27 +24,24 @@
 # Determine which games would have been possible if the bag had been loaded with only 12 red cubes, 13 green cubes, and 14 blue cubes. What is the sum of the IDs of those games?
 
 import re
-
 file_path = "Day 2/game_text.txt"
 
 max_red= 12
 max_green= 13
 max_blue= 14
-
-red_counter=0
-green_counter= 0
-blue_counter= 0
+count= 0
 
 
 
 with open(file_path, 'r') as file:
-    # Read the contents of the file
+    """Read the contents of the file"""
     file_contents = file.read()
     words= file_contents.splitlines()
     
 
-def game_possibility_check(lst, color):
-    for num in lst:
+def game_possibility_check(list, color):
+    """Checks numbers and colors in list against the max amount of colors available and returns True or False."""
+    for num in list:
         if color == 'red' and num > max_red:
             return False
         elif color == 'green' and num > max_green:
@@ -55,42 +52,31 @@ def game_possibility_check(lst, color):
 
 
 for word in words:
+    """Start for loop to parse through text."""
     game_name_split, elf_pick_split=word.split(": ")            # Splits the Game # from the rest of the sentence
     elf_pick_split=elf_pick_split.split(";")                    # Splits the rest of the sentence into each color and their amount
     game_id_split= game_name_split.split(" ")                   # Splits word Game from the number
     game_id= int(game_id_split[1])                              # Converts the game ID into an integer
     
-    """Grabbing number of each color."""
-    red_color_amount= [int(x) for x in re.findall(r'(\d+(?:\.\d+)?) red', word)]
-    blue_color_amount= [int(x) for x in re.findall(r'(\d+(?:\.\d+)?) blue', word)]
-    green_color_amount= [int(x) for x in re.findall(r'(\d+(?:\.\d+)?) green', word)]
+    """Grabbing number of each color and converting to integer."""
+    red_color_amount= [int(num) for num in re.findall(r'(\d+(?:\.\d+)?) red', word)]
+    blue_color_amount= [int(num) for num in re.findall(r'(\d+(?:\.\d+)?) blue', word)]
+    green_color_amount= [int(num) for num in re.findall(r'(\d+(?:\.\d+)?) green', word)]
     
-    """Converting list to integer."""
-    for num in range(0, len(red_color_amount)):
-        red_color_amount[num]= int(red_color_amount[num])
-        possibility_red= game_possibility_check(red_color_amount, 'red')
-    for num in range(0, len(blue_color_amount)):
-        blue_color_amount[num]= int(blue_color_amount[num])
-        possibility_blue= game_possibility_check(blue_color_amount, 'blue')
-    for num in range(0, len(green_color_amount)):
-        green_color_amount[num]= int(green_color_amount[num])
-        possibility_green= game_possibility_check(green_color_amount, 'green')
-        
-    if possibility_red == 'False':
-        print("Sorry. Can't do that.")
-    else:
-        print("Ok!")
+    """Checks numbers for green, blue and red to see if it exceeds the max available for each color"""
+    possibility_red = game_possibility_check(red_color_amount, 'red')
+    possibility_green = game_possibility_check(green_color_amount, 'green')
+    possibility_blue = game_possibility_check(blue_color_amount, 'blue')
     
-    if possibility_green == 'False':
-        print("Sorry. Can't do that.")
+    """Takes results for each of the color possibilities and adds the game ID to the count."""
+    if not possibility_red or not possibility_green or not possibility_blue:
+        count += 0
+        print(f"Game {game_id} is impossible.")
     else:
-        print("Ok!")
+        count += game_id
+        print(f"Game {game_id} is possible.")
         
-    if possibility_blue == 'False':
-        print("Sorry. Can't do that.")
-    else:
-        print("Ok!")
-            
         
+print(count)
     
     
