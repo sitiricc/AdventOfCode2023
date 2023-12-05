@@ -35,12 +35,21 @@
 
 
 file_path = "Day 4/text_file.txt"
+total_count= 0
 
 with open(file_path, 'r') as file:
     """Read the contents of the file"""
     file_contents = file.read()
     words= file_contents.splitlines()
 
+
+def total_amount(pick_list):
+    list_length= len(pick_list)
+    if list_length== 0:
+        return 0
+    else:
+        return 2**(list_length-1)
+        
 
 for word in words:
     winning_pick_list= []
@@ -55,12 +64,15 @@ for word in words:
     
     for number in no_spaces_winning:
         """Deletes empty strings."""
-        if number is not None and number != '':
+        if number != '':
             winning_pick_list.append(number)
             
     for number in no_spaces_user:
         """Deletes empty strings."""
-        if number in no_spaces_winning:
+        if number in winning_pick_list and number != '':
             user_pick_list.append(number)
-            
-    print(no_spaces_user)
+    
+    current_count = total_amount(user_pick_list)
+    total_count += current_count
+
+print(f"The total points for the scratchcards are: {total_count}")
