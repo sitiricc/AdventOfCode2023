@@ -76,7 +76,7 @@ for word in words:
     else:
         count += game_id
         # print(f"Game {game_id} is possible.")
-        
+         
         
 print(count)
     

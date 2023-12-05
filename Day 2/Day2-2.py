@@ -28,6 +28,7 @@ max_red= 12
 max_green= 13
 max_blue= 14
 count= 0
+power_count= 0
 
 
 
@@ -73,12 +74,23 @@ for word in words:
     """Takes results for each of the color possibilities and adds the game ID to the count."""
     if not possibility_red or not possibility_green or not possibility_blue:
         count += 0
-        print(f"Game {game_id} is impossible.")
+        # print(f"Game {game_id} is impossible.")
     else:
         count += game_id
-        print(f"Game {game_id} is possible.")
+        # print(f"Game {game_id} is possible.")
         
-        
-print(count)
+    min_red= max(red_color_amount)
+    min_green= max(green_color_amount)
+    min_blue= max(blue_color_amount)
+    
+    power_of_set= min_red*min_green*min_blue
+    power_count+= power_of_set
+    
+    
+    # print(f"Game {game_id}: The minimum red needed is {min_red}, the minimum green needed for {min_green}, the minimum blue needed for {min_blue}")     
+    # print(f"The power of Game #{game_id} is {power_of_set}")   
+     
+print(f"The addition of the ID's of all possible games is {count}")
+print(f"The total power count is {power_count}")
     
     
