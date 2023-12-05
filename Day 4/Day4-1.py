@@ -60,11 +60,7 @@ for word in words:
             
     for number in no_spaces_user:
         """Deletes empty strings."""
-        if number is not None and number != '':
+        if number in no_spaces_winning:
             user_pick_list.append(number)
             
-    print(user_pick_list)
-        
-    
-    
-   
+    print(no_spaces_user)
