@@ -1,3 +1,4 @@
+# --- Day 2: Cube Conundrum ---
 # You're launched high into the atmosphere! The apex of your trajectory just barely reaches the surface of a large island floating in the sky. You gently land in a fluffy pile of leaves. It's quite cold, but you don't see much snow. An Elf runs over to greet you.
 
 # The Elf explains that you've arrived at Snow Island and apologizes for the lack of snow. He'll be happy to explain the situation, but it's a bit of a walk, so you have some time. They don't get many visitors up here; would you like to play a game in the meantime?
@@ -71,10 +72,10 @@ for word in words:
     """Takes results for each of the color possibilities and adds the game ID to the count."""
     if not possibility_red or not possibility_green or not possibility_blue:
         count += 0
-        print(f"Game {game_id} is impossible.")
+        # print(f"Game {game_id} is impossible.")
     else:
         count += game_id
-        print(f"Game {game_id} is possible.")
+        # print(f"Game {game_id} is possible.")
         
         
 print(count)
