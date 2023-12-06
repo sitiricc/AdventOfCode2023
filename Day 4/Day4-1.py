@@ -72,7 +72,6 @@ for word in words:
         if number in winning_pick_list and number != '':
             user_pick_list.append(number)
     
-    current_count = total_amount(user_pick_list)
-    total_count += current_count
+    total_count += total_amount(user_pick_list) 
 
 print(f"The total points for the scratchcards are: {total_count}")

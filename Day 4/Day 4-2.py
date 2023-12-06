@@ -26,10 +26,9 @@
 
 # Process all of the original and copied scratchcards until no more scratchcards are won. Including the original set of scratchcards, how many total scratchcards do you end up with?
 
-
-
 file_path = "Day 4/text_file.txt"
 total_count= 0
+count_dictionary= {}
 
 with open(file_path, 'r') as file:
     """Read the contents of the file"""
@@ -48,8 +47,11 @@ def total_amount(pick_list):
 for word in words:
     winning_pick_list= []
     user_pick_list= []
+    
     """Start for loop to parse through text."""
     game_name_split, ticket_number_split=word.split(": ")            # Splits the Game # from the rest of the sentence
+    game_id = int(game_name_split.split()[1]) 
+    
     full_card_split=ticket_number_split.split("|")                   # Splits the winning numbers from the user picked numbers
     winning_numbers= full_card_split[0]                              # Creates winning number variable
     user_pick= full_card_split[1]                                    # Creates user pick number variable
