@@ -45,13 +45,13 @@ def total_amount(pick_list):
     else:
         return 2**(list_length-1)
 
-# def count_numbers(numbers, user_pick_list):
-#     number_list = []
-#     for number in numbers:
-#         """If the number is not empty and the number is in the user pick list, increment the count."""
-#         if number != '' and number in user_pick_list:
-#             number_list.append(number)
-#     return len(number_list)
+def count_numbers(numbers, user_pick_list):
+    number_list = []
+    for number in numbers:
+        """If the number is not empty and the number is in the user pick list, increment the count."""
+        if number != '' and number in user_pick_list:
+            number_list.append(number)
+    return len(number_list)
 
 def count_numbers(left_numbers, right_numbers):
     matching_numbers = set(left_numbers) & set(right_numbers)
@@ -84,15 +84,17 @@ for word in words:
         """If the number is not empty and the number is in the winning pick list, add it to user pick list."""
         if number != '' and number in winning_pick_list:
             user_pick_list.append(number)
-            
+    count_dictionary[0]= 1        
     card_numbers = count_numbers(winning_pick_list, user_pick_list)
-    count_dictionary[game_id] = card_numbers
+    count_dictionary[game_id+1] = card_numbers
     rounds= 0
-
     
-    total_count += count
+    
+
+
 
 print(count_dictionary)
     
 #     total_count += total_amount(user_pick_list)                 # adds up the amount of the matching numbers from the cards.
-# print(f"The total points for the scratchcards are: {total_count}")
+# print(f"The total scratchcards won are: {total_count}")
+
