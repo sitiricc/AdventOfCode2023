@@ -28,7 +28,9 @@
 
 file_path = "Day 4/text_file.txt"
 total_count= 0
+count= 0
 count_dictionary= {}
+
 
 with open(file_path, 'r') as file:
     """Read the contents of the file"""
@@ -42,7 +44,20 @@ def total_amount(pick_list):
         return 0
     else:
         return 2**(list_length-1)
-        
+
+# def count_numbers(numbers, user_pick_list):
+#     number_list = []
+#     for number in numbers:
+#         """If the number is not empty and the number is in the user pick list, increment the count."""
+#         if number != '' and number in user_pick_list:
+#             number_list.append(number)
+#     return len(number_list)
+
+def count_numbers(left_numbers, right_numbers):
+    matching_numbers = set(left_numbers) & set(right_numbers)
+    return len(matching_numbers)
+
+
 
 for word in words:
     winning_pick_list= []
@@ -50,7 +65,7 @@ for word in words:
     
     """Start for loop to parse through text."""
     game_name_split, ticket_number_split=word.split(": ")            # Splits the Game # from the rest of the sentence
-    game_id = int(game_name_split.split()[1]) 
+    game_id = int(game_name_split.split()[1])                        # sprint game index from word Game
     
     full_card_split=ticket_number_split.split("|")                   # Splits the winning numbers from the user picked numbers
     winning_numbers= full_card_split[0]                              # Creates winning number variable
@@ -58,17 +73,26 @@ for word in words:
     no_spaces_user= user_pick.split(" ")                             # Splits each user item after a space
     no_spaces_winning= winning_numbers.split(" ")                    # Splits each winning item after a space
     
+    
     for number in no_spaces_winning:
-        """Deletes empty strings."""
+        """Adds number to winning pick list unless they string is empty."""
         if number != '':
             winning_pick_list.append(number)
-            
-    for number in no_spaces_user:
-        """Deletes empty strings."""
-        if number in winning_pick_list and number != '':
-            user_pick_list.append(number)
     
-    current_count = total_amount(user_pick_list)
-    total_count += current_count
+        
+    for number in no_spaces_user:
+        """If the number is not empty and the number is in the winning pick list, add it to user pick list."""
+        if number != '' and number in winning_pick_list:
+            user_pick_list.append(number)
+            
+    card_numbers = count_numbers(winning_pick_list, user_pick_list)
+    count_dictionary[game_id] = card_numbers
+    rounds= 0
 
-print(f"The total points for the scratchcards are: {total_count}")
+    
+    total_count += count
+
+print(count_dictionary)
+    
+#     total_count += total_amount(user_pick_list)                 # adds up the amount of the matching numbers from the cards.
+# print(f"The total points for the scratchcards are: {total_count}")
