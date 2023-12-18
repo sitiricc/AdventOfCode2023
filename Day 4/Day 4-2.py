@@ -86,15 +86,10 @@ for word in words:
             user_pick_list.append(number)
     count_dictionary[0]= 1        
     card_numbers = count_numbers(winning_pick_list, user_pick_list)
-    count_dictionary[game_id+1] = card_numbers
-    rounds= 0
+
+    
+    for number in count_dictionary:
+        count_dictionary[game_id] +=1
     
     
-
-
-
-print(count_dictionary)
-    
-#     total_count += total_amount(user_pick_list)                 # adds up the amount of the matching numbers from the cards.
-# print(f"The total scratchcards won are: {total_count}")
 
